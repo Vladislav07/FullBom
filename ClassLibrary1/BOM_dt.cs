@@ -124,7 +124,8 @@ namespace FullBOM
                         if (!vault1.IsLoggedIn) { vault1.LoginAuto(GetAssemblyID.pdmName, 0); }
                         bFile = (IEdmFile7)vault1.GetFileFromPath(d, out IEdmFolder5 bFolder); 
                         if ((bFile != null) && (!bFile.IsLocked)) //true если файл не пусто и зачекинен                                           
-                        { workRow[GetAssemblyID.strDraw] = true; workRow[GetAssemblyID.strDrawState] = bFile.CurrentState.Name.ToString(); }
+                        { workRow[GetAssemblyID.strDraw] = true;
+                            workRow[GetAssemblyID.strDrawState] = bFile.CurrentState.Name.ToString(); }
 
                        // //Получаем и вносим в таблицу ID файла вручную
                       //   cFile = (IEdmFile7)vault1.GetFileFromPath(p, out IEdmFolder5 cFolder);

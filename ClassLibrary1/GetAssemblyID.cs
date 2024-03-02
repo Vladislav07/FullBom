@@ -13,6 +13,7 @@ namespace FullBOM
         public static int ASMID;
         public static int ASMFolderID;
         public static string name0;
+        #region var
         //public static string strFoundInVer;   //= "Found In Version";
         public static string pdmName;           //= "test";
         public static string strFullBOM;        //= "FullBOM";//Название Bills of Materials
@@ -82,14 +83,14 @@ namespace FullBOM
         public static DataGridViewCellStyle cellStyleErr  = new DataGridViewCellStyle();
         public static System.Drawing.Color colorError = new System.Drawing.Color();
 
-
+        #endregion
         public void GetAddInInfo(ref EdmAddInInfo poInfo, IEdmVault5 poVault, IEdmCmdMgr5 poCmdMgr)
         {
             //Specify information to display in the add-in's Properties dialog box
-            poInfo.mbsAddInName = "FullBOM_2.0.6";
+            poInfo.mbsAddInName = "ConvertToPDF";
             poInfo.mbsCompany = "CUBY";
-            poInfo.mbsDescription = "Create specification FullBOM";
-            poInfo.mlAddInVersion = 050419;
+            poInfo.mbsDescription = "....";
+            poInfo.mlAddInVersion = 020324;
             poInfo.mlRequiredVersionMajor = 27;
             poInfo.mlRequiredVersionMinor = 1;
             
@@ -103,9 +104,9 @@ namespace FullBOM
             try
             {
                 {
-                
+                    #region setVar
                     //Заполнение названий свойств из файла
-                    System.IO.StreamReader objReader = new System.IO.StreamReader("C:\\CUBY_PDM\\Library\\templates\\Cuby Templates\\FullBOM_2.0.2.cfg"); 
+                    System.IO.StreamReader objReader = new System.IO.StreamReader("C:\\Users\\belov\\source\\FB\\FullBOM_2.0.2.cfg"); 
                     string sLine = "";
                     ArrayList arrText = new ArrayList();
                     while (sLine != null)
@@ -198,19 +199,19 @@ namespace FullBOM
                     colorError = System.Drawing.Color.FromName(strColErr); //Цвет ошибки
                     cellStyleErr.BackColor = colorError; //Стиль ячеек содержащих ошибки
 
-
+                    #endregion
                     string FileName = ((EdmCmdData)ppoData.GetValue(0)).mbsStrData1;
                     string e = System.IO.Path.GetExtension(FileName);
                     name0 = System.IO.Path.GetFileNameWithoutExtension(FileName);
                    
-                    if ((e == ".sldasm") || (e == ".SLDASM"))
+                    if ((e == ".sldasm") || (e == ".SLDASM"))   //replace slddrw
                     {
                         EdmVault5 v = default(EdmVault5);
                         v = (EdmVault5)poCmd.mpoVault;
                         ASMID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID1;
                         ASMFolderID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID3;      
 
-                        Application.Run(new Form1());
+                       // Application.Run(new Form1());
                     }
                     else
                     {

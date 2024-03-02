@@ -5,6 +5,7 @@ using EPDM.Interop.epdm;
 using Microsoft.Office.Interop.Excel;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
 
 
@@ -739,6 +740,55 @@ namespace FullBOM
 
         private void AdvancedDataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e){rowerfilt = 1;}
 
+        private void btnToPDF_Click(object sender, EventArgs e)
+        {
+            Export_to_Excel(advancedDataGridView1);
+        }
 
+        private void Convert_to_PDF(ADGV.AdvancedDataGridView DG)
+        {
+            List<string> listDrawingPath = new List<string>();
+            try
+            {
+                //Папка по умолчанию для сохранения excel
+                //while (pathname0.Contains("\\CAD")) { pathname0 = System.IO.Path.GetDirectoryName(pathname0); }    
+                //saveFileDialog1.InitialDirectory = pathname0 + "\\Текстовые документы";
+
+                saveFileDialog1.Title = "Save FullBOM as Excel File";
+                saveFileDialog1.FileName = GetAssemblyID.name0 + "_v" + comboBox1.SelectedItem.ToString() + "_BOM";
+                saveFileDialog1.Filter = "Excel Files(2007)|*.xlsx|Excel Files(2003)|*.xls";
+                if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+
+                {
+
+                    this.Cursor = Cursors.WaitCursor;
+
+
+                    foreach (DataGridViewRow i in DG.Rows)
+                    {
+                        if (i.IsNewRow) continue;
+                        DataGridViewCellCollection j = i.Cells;
+                        if(j[GetAssemblyID.strDraw].Value.ToString() == "1")
+                        {
+                            listDrawingPath.Add(j[GetAssemblyID.strDraw].Value.ToString());
+                        }
+                           
+                        
+                    }
+                                                  
+                    this.Cursor = Cursors.Arrow;
+                }
+            }
+
+            catch
+            {
+
+                this.Cursor = Cursors.Arrow;
+                MessageBox.Show(" No access to file " + "\n" + saveFileDialog1.FileName.ToString());
+
+            }
+
+
+        }
     }
 }
