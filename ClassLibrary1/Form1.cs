@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
+using SldWorks;
 
 
 
@@ -83,7 +84,7 @@ namespace FullBOM
                 if (comboBox3.FindStringExact(GetAssemblyID.strFullBOM) != -1)
                 { comboBox3.SelectedItem = GetAssemblyID.strFullBOM; }
                 else
-                { MessageBox.Show("Add the " + GetAssemblyID.strFullBOM + " templete to Bills of materials"); Environment.Exit(0); }
+                { MessageBox.Show("Add the " + GetAssemblyID.strFullBOM + " templete to Bills of materials"); System.Environment.Exit(0); }
 
                 comboBox4.Items.Add("");
 
@@ -775,7 +776,9 @@ namespace FullBOM
                            
                         
                     }
-                                                  
+                    SetConversionOptions();
+
+
                     this.Cursor = Cursors.Arrow;
                 }
             }
@@ -789,6 +792,12 @@ namespace FullBOM
             }
 
 
+        }
+
+        private void SetConversionOptions()
+        {
+            SldWorks.SldWorks swApp = new SldWorks.SldWorks();
+            
         }
     }
 }
