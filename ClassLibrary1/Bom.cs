@@ -3,12 +3,9 @@ using EdmLib;
 using System.Windows.Forms;
 using System.Collections;
 
-
-
-
-namespace FullBOM
+namespace FullBOM_206
 {
-    public class GetAssemblyID : IEdmAddIn5
+   public class Bom
     {
         public static int ASMID;
         public static int ASMFolderID;
@@ -80,24 +77,11 @@ namespace FullBOM
         public static string strIgs;            //= IGS files
         public static string strNoSHEETS;       //= NoSHEETS;
 
-        public static DataGridViewCellStyle cellStyleErr  = new DataGridViewCellStyle();
+        public static DataGridViewCellStyle cellStyleErr = new DataGridViewCellStyle();
         public static System.Drawing.Color colorError = new System.Drawing.Color();
 
         #endregion
-        public void GetAddInInfo(ref EdmAddInInfo poInfo, IEdmVault5 poVault, IEdmCmdMgr5 poCmdMgr)
-        {
-            //Specify information to display in the add-in's Properties dialog box
-            poInfo.mbsAddInName = "ConvertToPDF";
-            poInfo.mbsCompany = "CUBY";
-            poInfo.mbsDescription = "....";
-            poInfo.mlAddInVersion = 020324;
-            poInfo.mlRequiredVersionMajor = 27;
-            poInfo.mlRequiredVersionMinor = 1;
-            
-
-            poCmdMgr.AddCmd(1000, poInfo.mbsAddInName, (int)EdmMenuFlags.EdmMenu_MustHaveSelection| (int)EdmMenuFlags.EdmMenu_OnlyFiles|(int)EdmMenuFlags.EdmMenu_OnlySingleSelection, "Open specification", "First command", 0, 99);
-        }
-
+  
 
         public void OnCmd(ref EdmCmd poCmd, ref Array ppoData)
         {
@@ -106,7 +90,7 @@ namespace FullBOM
                 {
                     #region setVar
                     //Заполнение названий свойств из файла
-                    System.IO.StreamReader objReader = new System.IO.StreamReader("C:\\Users\\v.belov\\source\\FB\\FullBOM_2.0.2.cfg"); 
+                    System.IO.StreamReader objReader = new System.IO.StreamReader("C:\\Users\\v.belov\\source\\FB\\FullBOM_2.0.2.cfg");
                     string sLine = "";
                     ArrayList arrText = new ArrayList();
                     while (sLine != null)
@@ -203,15 +187,15 @@ namespace FullBOM
                     string FileName = ((EdmCmdData)ppoData.GetValue(0)).mbsStrData1;
                     string e = System.IO.Path.GetExtension(FileName);
                     name0 = System.IO.Path.GetFileNameWithoutExtension(FileName);
-                   
+
                     if ((e == ".sldasm") || (e == ".SLDASM"))   //replace slddrw
                     {
                         EdmVault5 v = default(EdmVault5);
                         v = (EdmVault5)poCmd.mpoVault;
                         ASMID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID1;
-                        ASMFolderID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID3;      
+                        ASMFolderID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID3;
 
-                       // Application.Run(new Form1());
+                        // Application.Run(new Form1());
                     }
                     else
                     {
@@ -225,9 +209,9 @@ namespace FullBOM
             }
 
             catch (System.Runtime.InteropServices.COMException ex)
-            {MessageBox.Show("HRESULT = 0x" + ex.ErrorCode.ToString("X") + " " + ex.Message);}
+            { MessageBox.Show("HRESULT = 0x" + ex.ErrorCode.ToString("X") + " " + ex.Message); }
             catch (Exception ex)
-            {MessageBox.Show(ex.Message);}
+            { MessageBox.Show(ex.Message); }
 
         }
     }
