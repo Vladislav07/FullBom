@@ -51,10 +51,14 @@ namespace FullBOM
 
             vault2 = (IEdmVault7)vault1;
 
-            if (!vault1.IsLoggedIn) { vault1.LoginAuto(GetAssemblyID.pdmName, this.Handle.ToInt32()); }
+            if (!vault1.IsLoggedIn) { vault1.LoginAuto("CUBY_PDM", 0 ); } //GetAssemblyID.pdmNamethis.Handle.ToInt32()
 
-            aFile = (IEdmFile7)vault1.GetObject(EdmObjectType.EdmObject_File, GetAssemblyID.ASMID);
-            aFolder = (IEdmFolder5)vault1.GetObject(EdmObjectType.EdmObject_Folder, GetAssemblyID.ASMFolderID);
+            // (IEdmFile7)vault1.GetObject(EdmObjectType.EdmObject_File, Bom.ASMID);
+            // aFolder = (IEdmFolder5)vault1.GetObject(EdmObjectType.EdmObject_Folder, Bom.ASMFolderID);
+            IEdmFile5 f = null;
+         
+            f = vault1.GetFileFromPath(Bom.name0, out aFolder);
+            aFile = (IEdmFile7)f;
 
             // Заполняем при запуске в первый раз и рефреше
             if (load == 0)

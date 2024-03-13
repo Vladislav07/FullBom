@@ -8,7 +8,7 @@ using EPDM.Interop.epdm;
 
 namespace FullBOM
 {
-   public class Sample
+    public class Sample
     {
         private void Convert_to_PDF(ADGV.AdvancedDataGridView DG)
         {
@@ -25,7 +25,8 @@ namespace FullBOM
                     }
 
                 }
-                
+
+
             }
 
             catch
@@ -36,4 +37,5 @@ namespace FullBOM
             }
 
         }
+    }
 }

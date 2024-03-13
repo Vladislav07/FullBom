@@ -7,8 +7,8 @@
     <ProjectGuid>{13192842-042F-4561-8E28-B34CFD3140DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FullBOM_206</RootNamespace>
-    <AssemblyName>FullBOM_2.0.6</AssemblyName>
+    <RootNamespace>FullBOM_3</RootNamespace>
+    <AssemblyName>FullBOM_3.0.0</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>

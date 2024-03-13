@@ -2,11 +2,13 @@
 using EdmLib;
 using System.Windows.Forms;
 using System.Collections;
+using System.Collections.Generic;
 
-namespace FullBOM_206
+namespace FullBOM
 {
-   public class Bom
+    public class Bom
     {
+
         public static int ASMID;
         public static int ASMFolderID;
         public static string name0;
@@ -81,13 +83,12 @@ namespace FullBOM_206
         public static System.Drawing.Color colorError = new System.Drawing.Color();
 
         #endregion
-  
 
-        public void OnCmd(ref EdmCmd poCmd, ref Array ppoData)
+    public void Cmd(string FileName)
         {
             try
             {
-                {
+               
                     #region setVar
                     //Заполнение названий свойств из файла
                     System.IO.StreamReader objReader = new System.IO.StreamReader("C:\\Users\\v.belov\\source\\FB\\FullBOM_2.0.2.cfg");
@@ -175,36 +176,35 @@ namespace FullBOM_206
                     strPrelim = arrText[59].ToString();         //= "Preliminary design";
 
 
-                    str3DCuting = arrText[60].ToString();       //= 3D cuttings;
-                    strIgs = arrText[61].ToString();            //= isIgs;
-                    strNoSHEETS = arrText[62].ToString();       //= NoSHEETS;
+                   // str3DCuting = arrText[60].ToString();       //= 3D cuttings;
+                  //  strIgs = arrText[61].ToString();            //= isIgs;
+                  //  strNoSHEETS = arrText[62].ToString();       //= NoSHEETS;
 
 
                     colorError = System.Drawing.Color.FromName(strColErr); //Цвет ошибки
                     cellStyleErr.BackColor = colorError; //Стиль ячеек содержащих ошибки
 
                     #endregion
-                    string FileName = ((EdmCmdData)ppoData.GetValue(0)).mbsStrData1;
+         
                     string e = System.IO.Path.GetExtension(FileName);
-                    name0 = System.IO.Path.GetFileNameWithoutExtension(FileName);
+                name0 = FileName; // System.IO.Path.GetFileNameWithoutExtension(FileName);
 
                     if ((e == ".sldasm") || (e == ".SLDASM"))   //replace slddrw
                     {
-                        EdmVault5 v = default(EdmVault5);
-                        v = (EdmVault5)poCmd.mpoVault;
-                        ASMID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID1;
-                        ASMFolderID = ((EdmCmdData)ppoData.GetValue(0)).mlObjectID3;
+                        //EdmVault5 v = new EdmVault5();
+                        //v.LoginAuto(pdmName, 0);
+                         ASMID = 11; //((EdmCmdData)ppoData.GetValue(0)).mlObjectID1;
+                        ASMFolderID = 22; // ((EdmCmdData)ppoData.GetValue(0)).mlObjectID3;
 
-                        // Application.Run(new Form1());
+                         Application.Run(new Form1());
                     }
                     else
                     {
-                        EdmVault5 v = default(EdmVault5);
-                        v = (EdmVault5)poCmd.mpoVault;
-                        v.MsgBox(poCmd.mlParentWnd, "Select the assembly model file (.SLDASM)", EdmMBoxType.EdmMbt_Icon_Warning, "Attention!");
+                     
+                
                         Application.Exit();
                     }
-                }
+                
 
             }
 

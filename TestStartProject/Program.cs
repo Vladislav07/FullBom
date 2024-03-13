@@ -9,8 +9,16 @@ namespace TestStartProject
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
+            Bom bom = new Bom();
+            bom.Cmd("C:\\CUBY_PDM\\CUBY_00205031.sldasm");
+
+
+
+            
+
         }
     }
 }
